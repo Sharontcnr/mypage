@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="zh-TW">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucy's Kitchen</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="mycss01.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <style>
+        .ocean-card { transition: transform 0.3s ease; }
+        .ocean-card:hover { transform: translateY(-10px); }
+    </style>
+
+    <style>
+        /* 共用背景 */
+        .bg-cover {
+            background-position: center center;
+            background-size: cover;
+        }
+        /* 海洋主色 */
+        :root {
+            --ocean-blue: #0b3d4f;
+            --sea-blue: #1f6f8b;
+            --aqua: #99d5df;
+            --sand: #f4f4f2;
+            --banner-bg: #0b3d4f;
+        }
+/* ======================
+    s01 促銷 Banner
+====================== */
+        #s01 {
+            background: var(--banner-bg);
+            color: white;
+            font-size: .85rem;
+            letter-spacing: .08rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        /* 背景紋理 */
+        #s01::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(90deg, transparent, transparent 60px,
+                    rgba(255, 255, 255, 0.03) 60px,
+                    rgba(255, 255, 255, 0.03) 61px);
+            pointer-events: none;
+        }
+        /* ★ 三欄對稱容器 */
+        .banner-inner {
+            position: relative;
+            z-index: 2;
+        }
+        /* 社群 icon */
+        .banner-social {
+            min-width: 100px;
+            /* ★ 與右側佔位等寬 */
+        }
+        /* 右側佔位，撐開對稱空間 */
+        .banner-right-placeholder {
+            min-width: 100px;
+            /* ★ 與左側 banner-social 等寬 */
+        }
+        /* 中間內容區 */
+        .banner-marquee-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+        /* icon 擺動動畫 */
+        .banner-icon {
+            font-size: 1rem;
+            animation: rock 1.4s ease-in-out infinite;
+            display: inline-block;
+        }
+        @keyframes rock {
+            0%,
+            100% {
+                transform: rotate(-12deg);
+            }
+            50% {
+                transform: rotate(12deg);
+            }
+        }
+        /* CTA 按鈕 */
+        .banner-cta {
+            border: 1.5px solid rgba(153, 213, 223, 0.7);
+            color: var(--aqua);
+            border-radius: 100px;
+            padding: 3px 14px;
+            text-decoration: none;
+            transition: 0.25s;
+            white-space: nowrap;
+        }
+
+        .banner-cta:hover {
+            background: var(--aqua);
+            color: var(--ocean-blue);
+        }
+
+        /* 平板 */
+        @media (max-width: 992px) {
+            .banner-right-placeholder {
+                display: none;
+            }
+            .banner-social {
+                min-width: auto;
+            }
+        }
+        /* 手機 */
+        @media (max-width: 576px) {
+            #s01 .fw-bold {
+                font-size: 0.75rem;
+            }
+            .banner-marquee-wrap {
+                gap: 0.5rem;
+            }
+            .banner-icon:last-of-type {
+                display: none;
+            }
+            .banner-social {
+                display: none !important;
+            }
+            /* 手機隱藏社群 icon 防止擠壓 */
+        }
+/* ======================
+   s02 導覽列
+====================== */
+        #s02 {
+            background: var(--ocean-blue);
+            transition: 0.5s;
+        }
+
+/* ======================
+   s03 Hero Carousel
+====================== */
+
+        .s03-img {
+            width: 100%;
+            height: 85vh;
+            object-fit: cover;
+        }
+
+        .carousel-item {
+            min-height: 400px;
+            position: relative;
+        }
+
+        .carousel-item::before {
+            position: absolute;
+            content: "";
+            inset: 0;
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
+            z-index: 1;
+        }
+
+        .carousel-caption-block {
+            position: absolute;
+            left: 18%;
+            bottom: 30%;
+            max-width: 500px;
+            z-index: 2;
+        }
+
+        .carousel-badge {
+            color: #ffc107;
+            border: 1px solid rgba(255, 193, 7, 0.5);
+            border-radius: 100px;
+            padding: 4px 12px;
+            font-size: .85rem;
+            display: inline-block;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            z-index: 10;
+        }
+
+
+/* ======================
+    s04 菜單介紹
+====================== */
+
+        #s04 {
+            background: var(--sand);
+        }
+
+        .food-card {
+            transition: .4s;
+            height: 100%;
+        }
+
+        .food-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+ /* ======================
+    s07 明星主廚介紹
+====================== */       
+        .s07-userimg {
+            width: 120px;
+            height: 160px;
+            object-fit: cover;
+            transition: border-radius 1s, transform 1s;
+        }
+
+        .s07-userimg:hover {
+            border-radius: 50px;
+            box-shadow: 2px 2px 2px 2px #ccc;
+            transform: scale(1.2);
+        }
+
+ /* ====================================
+    s08  產地故事 源自大海的餽贈
+==================================== */
+/* 海洋風格全域設定 */
+.ocean-section {
+    background-color: #f0f7fa; /* 極淺的水藍色背景，讓視覺放鬆 */
+    position: relative;
+    overflow: hidden;
+}
+
+.ocean-tag {
+    color: #0077be;
+    font-weight: 700;
+    letter-spacing: 3px;
+    border-bottom: 2px solid #0077be;
+    display: inline-block;
+}
+
+/* 海洋數據卡片 */
+.ocean-card {
+    background: #ffffff;
+    border: none;
+    border-radius: 20px; /* 圓潤感，像被海水打磨過的卵石 */
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border-bottom: 4px solid #e0eff5;
+}
+
+.ocean-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 119, 190, 0.1);
+    border-bottom: 4px solid #0077be;
+}
+
+.ocean-card .h1 {
+    color: #005b96; /* 深邃海洋藍 */
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+.text-primary {
+    color: #0077be !important; /* 活潑的水藍色 */
+}
+
+/* 圖片遮罩：讓大圖帶有一層淡淡的海藍色調 */
+.ocean-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to right, rgba(0, 91, 150, 0.2), transparent);
+}
+
+/* 裝飾性波浪 (選配：可增加在背景) */
+.ocean-section::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0, 119, 190, 0.05) 0%, transparent 70%);
+    z-index: 0;
+}
+/* ======================
+    s05 永續海洋
+====================== */
+
+        #s05 {
+            background: var(--sea-blue);
+            color: white;
+        }
+
+/* ======================
+    s06 Footer
+====================== */
+
+        #s06 {
+            background: var(--ocean-blue);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+<!-- ***************s01 促銷 Banner / 社群連結****************** -->
+    <section id="s01" class="py-2">
+        <div class="container d-flex align-items-center justify-content-between">
+            <div class="banner-marquee-wrap">
+                <span class="banner-icon">
+                    <img src="image/Section6/girlicon01.png" style="width: 28px; height:28px; object-fit: contain;">
+                </span>
+                <!-- 中間文字 -->
+                <span class="fw-bold">買二送一 ・ 新鮮龍蝦堡限時優惠</span>
+                <span class="banner-icon">
+                    <img src="image/Section6/girlicon01.png" style="width: 28px; height:28px; object-fit: contain;">
+                </span>
+                <!-- CTA -->
+                <a href="#" class="banner-cta">立即訂購</a>
+            </div>
+            <!-- 社群 icon -->
+            <div class="banner-social d-flex gap-3 wow animate__animated animate__fadeInRight" data-wow-delay="0.2s">
+                <a href="#" class="text-info"><i class="fa-brands fa-facebook fa-lg"></i></a>
+                <a href="#" class="text-white"><i class="fa-brands fa-twitter fa-lg"></i></a>
+                <a href="#" class="text-success"><i class="fa-brands fa-line fa-lg"></i></a>
+            </div>
+        </div>
+    </section>
+<!-- *****************s02 選單******************** -->
+    <section id="s02" class="sticky-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand fw-bold text-info" href="#">
+                        <i class="fa-solid fa-fish me-2"></i>Lucy’s Kitchen</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto justify-content-center">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">首頁</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">關於露西</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">招牌餐點</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">永續海洋</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">餐點價格</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">網路購物</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">徵才訊息</a>
+                            </li>
+                        </ul>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-outline-info">線上訂餐</button>
+                            <button class="btn btn-outline-warning btn-sm">註冊</button>
+                            <button class="btn btn-success btn-sm">登入</button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </section>
+<!-- *****************s03 選單******************** -->
+    <section id="s03">
+        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-pause="hover">
+            <!--1. 小圓點指示器 (只放圓點)-->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+            </div>
+            <!-- 2. 三張圖都在 carousel-inner 裡面 -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="image/Section1/coastal-seafood01.jpg" class="d-block w-100 s03-img" alt="...">
+                    <div
+                        class="carousel-caption carousel-caption-block bg-dark bg-opacity-75 p-4 shadow-lg rounded-3 text-start">
+                        <div class="carousel-badge">Fresh Seafood</div>
+                        <h1 class="fw-bold">藍海珍味龍蝦扇貝拼盤</h1>
+                        <p class="text-white-50">
+                            嚴選鮮甜扇貝與彈嫩龍蝦，香煎鎖住海味，搭配奶油與檸檬提香，口感鮮嫩多汁，呈現層次豐富的海洋風味。
+                        </p>
+                        <button class="btn btn-warning">查看菜單
+                        </button>
+                        <button class="btn btn-outline-light">特惠方案
+                        </button>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <img src="image/Section1/italy-food.jpg" class="d-block w-100 s03-img" alt="...">
+                    <div
+                        class="carousel-caption carousel-caption-block bg-dark bg-opacity-75 p-4 shadow-lg rounded-3  text-start">
+                        <div class="carousel-badge mb-2">Ocean Breeze Pasta</div>
+                        <h1 class="fw-bold">地中海風味海鮮義大利麵</h1>
+                        <p class="text-white-50">
+                            嚴選鮮蝦、蛤蜊與海鮮搭配義大利麵，加入橄欖油、蒜香與香草拌炒，保留海鮮自然鮮甜，風味清爽層次豐富，展現地中海料理的經典魅力。
+                        </p>
+                        <button class="btn btn-warning">查看菜單
+                        </button>
+                        <button class="btn btn-outline-light">特惠方案
+                        </button>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="image/Section1/coastal-seafood02.jpg" class="d-block w-100 s03-img" alt="...">
+                    <div
+                        class="carousel-caption carousel-caption-block bg-dark bg-opacity-75 p-4 shadow-lg rounded-3  text-start">
+                        <div class="carousel-badge mb-2">Fresh Oysters
+                        </div>
+                        <h1 class="fw-bold">海風檸香鮮蠣</h1>
+                        <p class="mb-3 text-white-50">
+                            新鮮牡蠣搭配檸檬與白酒輕調味，入口鮮嫩滑順，帶有淡雅檸香與海洋清甜，風味清爽細緻，呈現最純粹的海味享受
+                        </p>
+                        <button class="btn btn-warning">查看菜單
+                        </button>
+                        <button class="btn btn-outline-light">特惠方案
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- 3. 左右箭頭放在 carousel-inner 之後 -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+    </section>
+
+
+<!-- *****************s04 選單******************** -->
+    <section id="s04" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">招牌推薦</h2>
+                <p>Featured Dishes</p>
+            </div>
+            <div class="flex row g-4">
+                <div class="col-md-4">
+                    <a href="/Lucyskitchen.html">
+                        <div class="card food-card">
+                            <img src="image/Section1/burger-seafood.jpg" class="card-img-top">
+                            <div class="card-body">
+                                <h5>黃金酥炸魷魚堡</h5>
+                                <p>香酥魷魚圈搭配黑芝麻漢堡麵包與新鮮芝麻葉，佐以濃郁蒜香醬。外酥內嫩、海味鮮甜，完美呈現海洋料理的豪華口感。</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <div class="card food-card">
+                        <img src="image/Section1/italy-noodle01.jpg" class="card-img-top">
+                        <div class="card-body">
+                            <h5>奶香貝類義大利麵</h5>
+                            <p>新鮮貽貝與蛤蜊釋放海洋鮮甜，搭配濃郁奶香醬汁與彈牙義大利麵，層次豐富、口感滑順，每一口都充滿迷人的海風滋味。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card food-card">
+                        <img src="image/Section1/pizza-seafood02.jpg" class="card-img-top">
+                        <div class="card-body">
+                            <h5>莫札瑞白醬披薩</h5>
+                            <p>經過高溫窯烤，餅皮酥脆與起司交互融合，烘烤後外皮金黃酥香，起司軟嫩拉絲。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<!-- *****************s07  明星主廚介紹 ***************** -->
+    <section id="s07">
+        <div class="container">
+            <div class="display-6 text-center fw-900 my-3 text-primary-emphasis">明星主廚介紹</div>
+            <div class="row" id="s07-userlist">
+                <div class="col-sm-6 col-xl-3 mt-3">
+                    <div class="d-flex">
+                        <img src="image/Section7/chef02.jpg" class="s07-userimg me-4" alt="">
+                    <div>
+                        <div class="h3">Miss Sophia </div>
+                            <p class="h5">專長: 海洋風味前菜與冷盤</p>
+                            <p class="h6">地中海風味溫沙拉、頂級生魚片 Carpaccio。</p>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3 mt-3">
+                    <div class="d-flex">
+                        <img src="image/Section7/chef03.jpg" class="s07-userimg me-4" alt="">
+                    <div>
+                        <div class="h3">Mr. Kai </div>
+                            <p class="h5">專長: 創意海鮮堡與美式熱火</p>
+                            <p class="h6">酥炸軟殼蟹堡、極致龍蝦捲。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3 mt-3">
+                    <div class="d-flex">
+                        <img src="image/Section7/chef04.jpg" class="s07-userimg me-4" alt="">
+                    <div>
+                        <div class="h3">Mr. Marco </div>
+                            <p class="h5">專長: 石窯披薩與在地漁獲</p>
+                            <p class="h6">拿坡里式薄皮披薩、煙燻小卷披薩。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3 mt-3">
+                    <div class="d-flex">
+                        <img src="image/Section7/chef06.jpg" class="s07-userimg me-4" alt="">
+                    <div>
+                        <div class="h3">Mr. Leo </div>
+                            <p class="h5">專長: 海鮮燉鍋與法式漁夫料理</p>
+                            <p class="h6">馬賽海鮮總匯燉湯、西班牙大鍋飯 (Paella)。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>            
+    </section>
+<!-- *****************s08  產地故事 源自大海的餽贈 ***************** -->
+    <section id="s08" class="ocean-section py-5">
+    <div class="container-fluid px-0">
+        <div class="row g-0 align-items-center">
+            <div class="col-md-5 bg-cover d-none d-md-block" style="background-image: url('image/Section4/marine-ecosystem01.jpg'); height: 600px;">
+                <div class="ocean-overlay"></div>
+            </div>
+            
+            <div class="col-md-7 ps-md-5 py-5 px-4">
+                <div class="ocean-tag text-uppercase mb-2">Sustainable Source</div>
+                <div class="h2 mb-4 fw-bold" style="color: #003366;">產地故事：源自大海的饋贈</div>
+                <p class="lead mb-4 text-muted">我們堅持與海洋永續共生，每一份食材都擁有專屬的身份證明，確保從捕撈到餐桌的純淨與新鮮。</p>
+
+                <div class="row mt-5 text-center">
+                    <div class="col-6 col-lg-3 mb-4">
+                        <div class="ocean-card p-3 shadow-sm">
+                            <div class="small text-primary mb-1">產地直送</div>
+                            <div class="h1 fw-900 mb-0"><span class="counter" data-target="0">0</span></div>
+                            <div class="small text-muted">km 航程</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3 mb-4">
+                        <div class="ocean-card p-3 shadow-sm">
+                            <div class="small text-primary mb-1">捕撈區域</div>
+                            <div class="h1 fw-900 mb-0"><span class="counter" data-target="12">0</span></div>
+                            <div class="small text-muted">全球海域</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3 mb-4">
+                        <div class="ocean-card p-3 shadow-sm">
+                            <div class="small text-primary mb-1">溯源編號</div>
+                            <div class="h1 fw-900 mb-0"><span class="counter" data-target="100">0</span>%</div>
+                            <div class="small text-muted">透明足跡</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3 mb-4">
+                        <div class="ocean-card p-3 shadow-sm">
+                            <div class="small text-primary mb-1">碳足跡</div>
+                            <div class="h1 fw-900 mb-0"><span class="counter" data-target="30">0</span>%</div>
+                            <div class="small text-muted">海洋友善</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- *****************s05 選單******************** -->
+    <section id="s05" class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="fw-bold">永續漁業</h2>
+                    <p>露西廚房與負責任漁業合作，確保每一份海鮮都來自永續捕撈。</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fa-solid fa-check text-info me-2"></i>保護海洋生態</li>
+                        <li><i class="fa-solid fa-check text-info me-2"></i>支持在地漁民</li>
+                        <li><i class="fa-solid fa-check text-info me-2"></i>100% 環保包裝</li>
+                    </ul>
+                </div>
+                <div class="col-md-6 text-center">
+                    <img src="image/Section4/ocean-conservation03.jpg" class="img-fluid rounded shadow-lg" alt="永續漁業">
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- *****************s06 選單******************** -->
+    <footer id="s06" class="py-5 text-center">
+        <div class="container">
+            <h3 class="fw-bold">Lucy’s Kitchen</h3>
+            <p>Fresh Seafood • Ocean Friendly</p>
+            <p class="small text-white-50">©2026 Lucy’s Kitchen All rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            new WOW().init(); // 初始化 WOW.js
+        });
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $("#s02").addClass("shadow-lg");
+                } else {
+                    $("#s02").removeClass("shadow-lg");
+                }
+            });
+            const myCarousel = new bootstrap.Carousel('#heroCarousel', {
+                interval: 4000,
+                pause: 'hover'
+            });
+        });
+
+        const myChefs = [           
+            { name: "Miss Sophia", skill: "專長: 海洋風味前菜與冷盤", desc: "地中海風味溫沙拉、頂級生魚片 Carpaccio。" },
+            { name: "Mr. Kai", skill: "專長: 創意海鮮堡與美式熱火", desc: "酥炸軟殼蟹堡、極致龍蝦捲。" },
+            { name: "Mr. Marco", skill: "專長: 石窯披薩與在地漁獲", desc: "拿坡里式薄皮披薩、煙燻小卷披薩。" },            
+            { name: "Mr. Leo", skill: "專長: 海鮮燉鍋與法式漁夫料理", desc: "馬賽海鮮總匯燉湯、西班牙大鍋飯 (Paella)。" }
+            ];
+            $.ajax({
+                url: 'https://randomuser.me/api/?results=6',
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data.results);
+                    $("#s07-userlist").empty();
+
+                    data.results.forEach(function (item,index) {
+                        let chef = myChefs[index];
+
+                        let strHTML = `<div class="col-sm-6 col-xl-3 mt-3">
+                                <div class="d-flex" align-items-center>
+                                    <img src="${item.picture.large}" class="s07-userimg me-4" alt="">
+                                    </div>
+                                        <div class="h3">${chef.name}</div>
+                                        <p class="h5 text-primary">${chef.skill}</p>
+                                        <p class="h6">${chef.desc}</p>
+                                    </div>
+                                </div>
+                            </div>`;
+                        $("#s07-userlist").append(strHTML);
+                    });
+                }
+            });
+
+<!-- *****************s08  產地故事 源自大海的餽贈 ***************** -->
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const counters = document.querySelectorAll('.counter');
+            const speed = 150; // 稍快一點的節奏，展現專業感
+
+            const animate = (el) => {
+            const target = +el.getAttribute('data-target');
+            const count = +el.innerText;
+            const time = target / speed;
+
+            if (count < target) {
+                el.innerText = Math.ceil(count + time);
+                setTimeout(() => animate(el), 20);
+            } else {
+                el.innerText = target;
+            }
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animate(entry.target);
+                observer.unobserve(entry.target);
+            }
+            });
+            }, { threshold: 0.2 });
+
+        counters.forEach(c => observer.observe(c));
+        });
+    </script>
+</body>
+
+</html>
